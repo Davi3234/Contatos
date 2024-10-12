@@ -23,22 +23,22 @@ class Router{
     ];
 
     public function createRouter($method, $path, $handlers) {
-        $path = str_replace('//', '/', trim("/$path"));
-    
-        if (!$path || $path == '/')
-          $path = '';
-    
-        foreach ($handlers as &$handler) {
-          if (!is_array($handler))
-            $handler = [$handler];
-        }
-    
-        if (isset($this->routers[$method][$path]))
-          throw new Exception("Router \"$method\" \"$path\" já foi definida");
-    
-        $this->routers[$method][$path] = [
-          'router' => $path,
-          'handlers' => $handlers,
-        ];
+      $path = str_replace('//', '/', trim("/$path"));
+  
+      if (!$path || $path == '/')
+        $path = '';
+  
+      foreach ($handlers as &$handler) {
+        if (!is_array($handler))
+          $handler = [$handler];
       }
+  
+      if (isset($this->routers[$method][$path]))
+        throw new Exception("Router \"$method\" \"$path\" já foi definida");
+  
+      $this->routers[$method][$path] = [
+        'router' => $path,
+        'handlers' => $handlers,
+      ];
+    }
 }

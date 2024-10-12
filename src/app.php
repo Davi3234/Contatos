@@ -1,11 +1,14 @@
 <?php
 
-use Src\Core\Router;
-
 require_once __DIR__ . '/routers.php';
 
-if (!isset($_GET['url']))
-  $_GET['url'] = $_SERVER['REQUEST_URI'];
+$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-$router = new Router();
+$url = rtrim($url, '/');
 
+if (array_key_exists($url, $rotas)) {
+    require_once __DIR__ . '/' . $rotas[$url];
+} else {
+    http_response_code(404);
+    echo "Erro 404: Página não encontrada!";
+}

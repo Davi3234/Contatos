@@ -11,7 +11,11 @@ use Src\Config\EntityManagerCreator;
 abstract class Repository
 {
 
-    public function __construct(protected $entityManager = EntityManagerCreator::getInstance()->getEntityManager()) {}
+    protected $entityManager;
+
+    public function __construct() {
+        $this->entityManager = EntityManagerCreator::getInstance()->getEntityManager();
+    }
 
     /**
      * Inserindo dado
