@@ -24,9 +24,9 @@ class PessoaController{
     public function inserePessoa(array $args): void{
         try {
             $this->pessoaService->inserePessoa($args);
-            echo (new Response("Inserido com sucesso","200"))->outputMessage();
+            echo (new Response("Inserido com sucesso",200))->outputMessage();
         } catch (Exception $e) {
-            echo (new Response($e->getMessage(),"500"))->outputMessage();
+            echo (new Response($e->getMessage(),500))->outputMessage();
         }
     }
     public function alteraPessoa(array $args, $id){
@@ -35,7 +35,10 @@ class PessoaController{
     public function removePessoa(array $id){
 
     }
-    public function getPessoa(int $id){
-
+    public function viewConsulta(){
+        require_once 'src/View/Pessoa/consulta.php';
+    }
+    public function viewCadastro(){
+        require_once 'src/View/Pessoa/cadastro.php';
     }
 }
