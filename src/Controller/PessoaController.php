@@ -36,6 +36,14 @@ class PessoaController{
     public function removePessoa(array $id){
 
     }
+    public function listAll($args){
+        try{
+            $pessoas = $this->pessoaService->listAll($args);
+            echo json_encode(['pessoas' => $pessoas]);
+        }catch (Exception $e){
+            echo (new Response($e->getMessage(), 500))->outputMessage();
+        }
+    }
     public function viewConsulta(){
         require_once 'src/View/Pessoa/consulta.php';
     }

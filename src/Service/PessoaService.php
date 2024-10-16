@@ -55,6 +55,26 @@ class PessoaService{
         }
     }
 
+    /**
+     * Função responsável por editar a pessoa
+     * @param array $args
+     * @throws Exception
+     * @return Pessoa[]
+     */
+    public function listAll(array $args){
+        try {
+            return $this->modelToArray($this->pessoaRepository->searchAll());
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    private function modelToArray($pessoas){
+        return array_map(function($pessoa){
+            return $pessoa->toArray();
+        }, $pessoas);
+    }
+
     public function validaDados(Pessoa $pessoa){
         if($pessoa->getNome() == ""){
             $this->erros[] = "Nome é de preenchimento obrigatório.";

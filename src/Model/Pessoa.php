@@ -19,8 +19,19 @@ class Pessoa
         #[Column]
         private string $nome,
         #[Column]
-        private string $cpf
+        private string $cpf,
+        #[Column]
+        private bool $fisica = true
     ) {}
+
+    public function toArray(){
+        return [
+            'id' => $this->id,
+            'nome' => $this->nome,
+            'cpf' => $this->cpf,
+            'fisica' => $this->fisica
+        ];
+    }
 
     /**
      * Retorna o Id da Pessoa
