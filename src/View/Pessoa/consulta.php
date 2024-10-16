@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php require_once VIEW.'Components/imports.php'?>
+    <?php require_once VIEW_PATH.'Components/imports.php'?>
     <title>Consulta de Pessoas</title>
 </head>
 <style>
@@ -13,7 +13,7 @@
   }
 </style>
 <body>
-    <?php require_once VIEW.'Components/menu.php'?>
+    <?php require_once VIEW_PATH.'Components/menu.php'?>
     <div class="container" style="margin-top: 60px">
       <button type="button" class="btn btn-primary" onclick="Incluir()">Incluir</button>
       <button type="button" class="btn btn-primary" onclick="Editar()">Editar</button>

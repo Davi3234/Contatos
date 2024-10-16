@@ -1,6 +1,3 @@
-<?php
-  namespace Src\View\Components;
-?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="">Contatos</a>

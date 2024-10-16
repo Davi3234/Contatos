@@ -26,6 +26,7 @@ class PessoaController{
             $this->pessoaService->inserePessoa($args);
             echo (new Response("Inserido com sucesso",200))->outputMessage();
         } catch (Exception $e) {
+            
             echo (new Response($e->getMessage(),500))->outputMessage();
         }
     }

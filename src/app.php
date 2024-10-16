@@ -1,6 +1,6 @@
 <?php
   
-define('VIEW', __DIR__.'/View/');
+define('VIEW_PATH', __DIR__.'/View/');
 
 require_once __DIR__ . '/routers.php';
 

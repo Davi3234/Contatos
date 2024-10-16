@@ -8,7 +8,7 @@ $action = str_replace('/api/pessoas', "", $url);
 
 $actions = [
   'POST' => [
-        '' => [PessoaController::class, 'inserePessoa']
+        '' => [PessoaController::class, 'inserePessoa'],
     ],
   'PUT' => [
         '' => [PessoaController::class, 'alteraPessoa']
@@ -24,4 +24,4 @@ $actions = [
 $controller = new $actions[$method][$action][0];
 $function = $actions[$method][$action][1];
 
-$controller->$function($_POST);
+$controller->$function($_REQUEST);

@@ -10,6 +10,7 @@ class Response{
     }
     
     public function outputMessage():string{
+        http_response_code($this->status);
         return json_encode([
             'status' => $this->status,
             'message' => $this->mensagem
