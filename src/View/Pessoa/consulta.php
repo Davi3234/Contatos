@@ -15,20 +15,27 @@
   <body>
       <?php require_once VIEW_PATH.'Components/menu.php'?>
       <div class="container" style="margin-top: 60px">
-        <button type="button" class="btn btn-primary" onclick="Incluir()">Incluir</button>
-        <button type="button" class="btn btn-primary" onclick="Editar()">Editar</button>
-        <button type="button" class="btn btn-danger" onclick="Excluir()">Excluir</button>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Nome</th>
-              <th scope="col">CPF</th>
-            </tr>
-          </thead>
-          <tbody id="body-pessoas">
-          </tbody>
-        </table>
+        <div class="card">
+          <div class="card-header text-center">
+              <h2 class="card-title">Consulta de Pessoa</h2>
+          </div>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary" onclick="Incluir()">Incluir</button>
+            <button type="button" class="btn btn-primary" onclick="Editar()">Editar</button>
+            <button type="button" class="btn btn-danger" onclick="Excluir()">Excluir</button>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nome</th>
+                  <th scope="col">CPF</th>
+                </tr>
+              </thead>
+              <tbody id="body-pessoas">
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       <script type="text/template" id="row-template">
