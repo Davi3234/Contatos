@@ -31,6 +31,7 @@
             <div class="actions">
               <button id="btn-incluir" type="button" class="btn btn-primary" onclick="Incluir()">Incluir</button>
               <button id="btn-editar" type="button" class="btn btn-primary" onclick="Editar()" disabled>Editar</button>
+              <button id="btn-visualizar" type="button" class="btn btn-primary" onclick="Visualizar()" disabled>Visualizar</button>
               <button id="btn-excluir" type="button" class="btn btn-danger" onclick="Excluir()" disabled>Excluir</button>
             </div>
             
@@ -97,6 +98,10 @@
         function Editar(){
           window.location="/view/contatos/edicao?id="+idSelected;
         }
+        
+        function Visualizar(){
+          window.location="/view/contatos/visualizar?id="+idSelected;
+        }
 
         async function Excluir(){
 
@@ -111,6 +116,7 @@
           }
 
           $("#btn-editar").attr('disabled', 'disabled');
+          $("#btn-visualizar").attr('disabled', 'disabled');
           $("#btn-excluir").attr('disabled', 'disabled');
 
           await loadContatos();
@@ -121,6 +127,7 @@
           $(this).addClass('table-active');
           idSelected = $(this).attr("idcontato");
           $("#btn-editar").removeAttr('disabled', 'disabled');
+          $("#btn-visualizar").removeAttr('disabled', 'disabled');
           $("#btn-excluir").removeAttr('disabled', 'disabled');
         }
         

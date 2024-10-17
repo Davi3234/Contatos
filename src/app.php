@@ -5,9 +5,10 @@ define('ALL_PATHS', [
 		'consultaPessoa' => ['title' => 'Consulta de Pessoas', 'url' => '/view/pessoas'],
 		'cadastroPessoa' => ['title' => 'Cadastro de Pessoa', 'url' => '/view/pessoas/cadastro'],
 		'edicaoPessoa' => ['title' => 'Edição de Pessoa', 'url' => '/view/pessoas/edicao'],
+		'visualizarPessoa' => ['title' => 'Visualização de Pessoa', 'url' => '/view/pessoas/visualizar'],
 		'consultaContato' => ['title' => 'Consulta de Contatos', 'url' => '/view/contatos'],
 		'cadastroContato' => ['title' => 'Cadastro de Contato', 'url' => '/view/contatos/cadastro'],
-		'edicaoContato' => ['title' => 'Edição de Contato', 'url' => '/view/contatos/edicao']
+		'visualizarContato' => ['title' => 'Visualização de Contato', 'url' => '/view/contatos/visualizar'],
 	]
 );
 

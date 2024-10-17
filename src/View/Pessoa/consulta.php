@@ -31,6 +31,7 @@
             <div class="actions">
               <button id="btn-incluir" type="button" class="btn btn-primary" onclick="Incluir()">Incluir</button>
               <button id="btn-editar" type="button" class="btn btn-primary" onclick="Editar()" disabled>Editar</button>
+              <button id="btn-visualizar" type="button" class="btn btn-primary" onclick="Visualizar()" disabled>Visualizar</button>
               <button id="btn-excluir" type="button" class="btn btn-danger" onclick="Excluir()" disabled>Excluir</button>
             </div>
             
@@ -95,6 +96,10 @@
           window.location="/view/pessoas/edicao?id="+idSelected;
         }
 
+        function Visualizar(){
+          window.location="/view/pessoas/visualizar?id="+idSelected;
+        }
+
         async function Excluir(){
 
           const response = await fetch('/api/pessoas/'+idSelected, {
@@ -108,6 +113,7 @@
           }
 
           $("#btn-editar").attr('disabled', 'disabled');
+          $("#btn-visualizar").attr('disabled', 'disabled');
           $("#btn-excluir").attr('disabled', 'disabled');
 
           await loadPessoas();
@@ -118,6 +124,7 @@
           $(this).addClass('table-active');
           idSelected = $(this).attr("idpessoa");
           $("#btn-editar").removeAttr('disabled', 'disabled');
+          $("#btn-visualizar").removeAttr('disabled', 'disabled');
           $("#btn-excluir").removeAttr('disabled', 'disabled');
         }
         

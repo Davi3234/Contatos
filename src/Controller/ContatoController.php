@@ -99,4 +99,17 @@ class ContatoController{
 
         require_once 'src/View/Contato/edicao.php';
     }
+
+    /**
+     * Chama a view de visualização
+     * @param array $args
+     * @return void
+     */
+    public function visualizar($args){
+        $breadCrumbs = [ALL_PATHS['home'], ALL_PATHS['consultaContato'], ALL_PATHS['visualizarContato']];
+
+        $contato = $this->contatoService->listOne($args);
+
+        require_once 'src/View/Contato/visualizar.php';
+    }
 }

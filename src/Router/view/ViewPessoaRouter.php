@@ -9,6 +9,7 @@ $actions = [
   '' => [PessoaController::class, 'viewConsulta'],
   '/cadastro' => [PessoaController::class, 'viewCadastro'],
   '/edicao' => [PessoaController::class, 'viewEdicao'],
+  '/visualizar' => [PessoaController::class, 'visualizar'],
 ];
 
 $controller = new $actions[$action][0];

@@ -99,4 +99,17 @@ class PessoaController{
 
         require_once 'src/View/Pessoa/edicao.php';
     }
+
+    /**
+     * Chama a view de visualização
+     * @param array $args
+     * @return void
+     */
+    public function visualizar($args){
+        $breadCrumbs = [ALL_PATHS['home'], ALL_PATHS['consultaPessoa'], ALL_PATHS['visualizarPessoa']];
+
+        $pessoa = $this->pessoaService->listOne($args);
+
+        require_once 'src/View/Pessoa/visualizar.php';
+    }
 }
