@@ -19,17 +19,14 @@ class Pessoa
         #[Column]
         private string $nome,
         #[Column]
-        private string $cpf,
-        #[Column]
-        private bool $fisica = true
+        private string $cpf
     ) {}
 
     public function toArray(){
         return [
             'id' => $this->id,
             'nome' => $this->nome,
-            'cpf' => $this->cpf,
-            'fisica' => $this->fisica
+            'cpf' => $this->cpf
         ];
     }
 

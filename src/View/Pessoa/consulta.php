@@ -14,7 +14,9 @@
   </style>
   <body>
       <?php require_once VIEW_PATH.'Components/menu.php'?>
+
       <div class="container" style="margin-top: 60px">
+        <?php require_once VIEW_PATH.'Components/breadcrumb.php'?>
         <div class="card">
           <div class="card-header text-center">
               <h2 class="card-title">Consulta de Pessoa</h2>
@@ -23,7 +25,7 @@
             <button type="button" class="btn btn-primary" onclick="Incluir()">Incluir</button>
             <button type="button" class="btn btn-primary" onclick="Editar()">Editar</button>
             <button type="button" class="btn btn-danger" onclick="Excluir()">Excluir</button>
-            <table class="table">
+            <table id="table-pessoa" class="table table-hover">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -31,15 +33,14 @@
                   <th scope="col">CPF</th>
                 </tr>
               </thead>
-              <tbody id="body-pessoas">
-              </tbody>
+              <tbody id="body-pessoas"></tbody>
             </table>
           </div>
         </div>
       </div>
 
       <script type="text/template" id="row-template">
-        <tr>
+        <tr idpessoa="{{id}}">
           <td>{{id}}</td>
           <td>{{cpf}}</td>
           <td>{{nome}}</td>
@@ -47,6 +48,8 @@
       </script>
 
       <script>
+        let idSelected = 0;
+
         async function loadPessoas(){
           const response = await fetch('/api/pessoas')
           .then(async function (response){
@@ -60,18 +63,29 @@
             document.getElementById('body-pessoas').innerHTML += content;
           });
         }
+
         function Incluir(){
           window.location='/view/pessoas/cadastro';
         }
+
         function Editar(){
-          window.location='/view/pessoas/edicao';
+          window.location="/view/pessoas/edicao?id="+idSelected;
         }
+
         function Excluir(){
 
         } 
-        window.onload = function (e){
-          loadPessoas();
-        };
+        function selectRow(){
+          $("#table-pessoa tbody tr").removeClass('table-active');
+          $(this).addClass('table-active');
+          idSelected = $(this).attr("idpessoa");
+        }
+        
+        $(async function() {
+          await loadPessoas();
+
+          $("#table-pessoa tbody tr").on("click", selectRow);
+        });
       </script>
   </body>
 </html>

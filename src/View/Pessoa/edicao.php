@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro de Pessoa</title>
+  <title>Edição de Pessoa</title>
   <?php require_once VIEW_PATH . 'Components/imports.php' ?>
 </head>
 
@@ -23,7 +23,7 @@
       <?php require_once VIEW_PATH . 'Components/breadcrumb.php' ?>
       <div class="card">
         <div class="card-header text-center">
-          <h2 class="card-title">Cadastro de Pessoa</h2>
+          <h2 class="card-title">Edição de Pessoa</h2>
         </div>
         <div class="card-body text-end">
           <div class="input-group mb-3">

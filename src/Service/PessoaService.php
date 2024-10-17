@@ -86,7 +86,7 @@ class PessoaService{
             $this->erros[] = "CPF é inválido.";
         }
         if(count($this->erros) > 0){
-            throw new Exception(implode("\n", $this->erros));
+            throw new Exception(implode("<br>", $this->erros));
         }
     }
 

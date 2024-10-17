@@ -1,5 +1,13 @@
 <?php
-  
+
+define('ALL_PATHS', [
+		'home' => ['title' => 'Home', 'url' => '/view'],
+		'consultaPessoa' => ['title' => 'Consulta de Pessoas', 'url' => '/view/pessoas'],
+		'cadastroPessoa' => ['title' => 'Cadastro de Pessoa', 'url' => '/view/pessoas/cadastro'],
+		'edicaoPessoa' => ['title' => 'Edição de Pessoa', 'url' => '/view/pessoas/edicao?'.$_GET['id']]
+	]
+);
+
 define('VIEW_PATH', __DIR__.'/View/');
 
 require_once __DIR__ . '/routers.php';

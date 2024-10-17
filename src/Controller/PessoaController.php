@@ -30,7 +30,7 @@ class PessoaController{
             echo (new Response($e->getMessage(),500))->outputMessage();
         }
     }
-    public function alteraPessoa(array $args, $id){
+    public function alteraPessoa(array $args){
 
     }
     public function removePessoa(array $id){
@@ -44,10 +44,36 @@ class PessoaController{
             echo (new Response($e->getMessage(), 500))->outputMessage();
         }
     }
+
+     /**
+     * Chama a view de consulta
+     * @return void
+     */
     public function viewConsulta(){
+        $breadCrumbs = [ALL_PATHS['home'], ALL_PATHS['consultaPessoa']];
         require_once 'src/View/Pessoa/consulta.php';
     }
+
+    /**
+     * Chama a view de cadastro
+     * @return void
+     */
     public function viewCadastro(){
+        $breadCrumbs = [ALL_PATHS['home'], ALL_PATHS['consultaPessoa'], ALL_PATHS['cadastroPessoa']];
+
         require_once 'src/View/Pessoa/cadastro.php';
+    }
+
+    /**
+     * Chama a view de edição
+     * @param array $args
+     * @return void
+     */
+    public function viewEdicao($args){
+        $breadCrumbs = [ALL_PATHS['home'], ALL_PATHS['consultaPessoa'], ALL_PATHS['edicaoPessoa']];
+
+        $id = $args['id'];
+
+        require_once 'src/View/Pessoa/edicao.php';
     }
 }
