@@ -19,8 +19,12 @@ class EntityManagerCreator
         );
 
         $connection = DriverManager::getConnection([
-            'driver' => 'pdo_sqlite',
-            'path' => __DIR__ . '/../db.sqlite',
+            'driver' => 'pdo_pgsql',
+            'dbname' => 'contatos_bd',
+            'user' => 'postgres',
+            'password' => 'postgres',
+            'host' => 'localhost',
+            'port' => 5432
         ], $config);
 
         $this->entityManager = new EntityManager($connection, $config);
