@@ -20,22 +20,31 @@
   <body>
       <?php require_once VIEW_PATH.'Components/menu.php'?>
 
-      <div class="container" style="margin-top: 60px">
+      <div class="container mt-4">
         <?php require_once VIEW_PATH.'Components/breadcrumb.php'?>
         <div class="card">
           <div class="card-header text-center">
               <h2 class="card-title">Consulta de Pessoa</h2>
           </div>
           <div class="card-body">
-            <button id="btn-incluir" type="button" class="btn btn-primary" onclick="Incluir()">Incluir</button>
-            <button id="btn-editar" type="button" class="btn btn-primary" onclick="Editar()" disabled>Editar</button>
-            <button id="btn-excluir" type="button" class="btn btn-danger" onclick="Excluir()" disabled>Excluir</button>
-            <table id="table-pessoa" class="table table-hover">
+
+            <div class="actions">
+              <button id="btn-incluir" type="button" class="btn btn-primary" onclick="Incluir()">Incluir</button>
+              <button id="btn-editar" type="button" class="btn btn-primary" onclick="Editar()" disabled>Editar</button>
+              <button id="btn-excluir" type="button" class="btn btn-danger" onclick="Excluir()" disabled>Excluir</button>
+            </div>
+            
+            <div class="input-group mb-3 mt-3">
+              <input type="text" class="form-control" id="filtro" placeholder="Nome..." aria-label="Nome..." aria-describedby="basic-addon1">
+              <button id="btn-pesquisar" type="button" class="btn btn-secondary" onclick="loadPessoas()">Pesquisar</button>
+            </div>
+
+            <table id="table-pessoa" class="table table-hover mt-3">
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Nome</th>
                   <th scope="col">CPF</th>
+                  <th scope="col">Nome</th>
                 </tr>
               </thead>
               <tbody id="body-pessoas"></tbody>
@@ -60,17 +69,20 @@
 
           $("#body-pessoas").html("");
 
-          const response = await fetch('/api/pessoas')
+          const response = await fetch('/api/pessoas?nome='+$("#filtro").val())
           .then(async function (response){
             return await response.json();
           });
 
-          response.pessoas.forEach(element => {
-            content = document.getElementById('row-template').innerHTML.replaceAll('{{id}}', element.id);
-            content = content.replaceAll('{{nome}}', element.nome);
-            content = content.replaceAll('{{cpf}}', element.cpf);
-            document.getElementById('body-pessoas').innerHTML += content;
-          });
+          if(response.pessoas){
+
+            response.pessoas.forEach(element => {
+              content = document.getElementById('row-template').innerHTML.replaceAll('{{id}}', element.id);
+              content = content.replaceAll('{{nome}}', element.nome);
+              content = content.replaceAll('{{cpf}}', element.cpf);
+              document.getElementById('body-pessoas').innerHTML += content;
+            });
+          }
 
           $("#table-pessoa tbody tr").on("click", selectRow);
         }

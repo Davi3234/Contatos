@@ -14,7 +14,7 @@ class Pessoa
     #[GeneratedValue]
     #[Column]
     private int $id;
-
+    
     public function __construct(
         #[Column]
         private string $nome,
@@ -37,6 +37,7 @@ class Pessoa
     public function getId(): int{
         return $this->id;
     }
+    
     /**
      * Retorna Nome da Pessoa
      * @return string
@@ -44,6 +45,7 @@ class Pessoa
     public function getNome(): string{
         return $this->nome;
     }
+
     /**
      * Retorna o CPF da Pessoa
      * @return string
@@ -51,6 +53,7 @@ class Pessoa
     public function getCpf(): string{
         return $this->cpf;
     }
+
     /**
      * Seta o nome no objeto
      * @param string $nome
@@ -59,6 +62,7 @@ class Pessoa
     public function setNome(string $nome): void{
         $this->nome = $nome;
     }
+
     /**
      * Seta o cpf no objeto
      * @param string $cpf

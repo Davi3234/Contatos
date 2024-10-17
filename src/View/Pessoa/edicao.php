@@ -18,19 +18,19 @@
 
 <body>
   <?php require_once VIEW_PATH . 'Components/menu.php' ?>
-  <form id="cadastroPessoa" style="margin-top: 20px">
+  <form id="edicao-pessoa" class="mt-4">
     <div class="container">
       <?php require_once VIEW_PATH . 'Components/breadcrumb.php' ?>
       <div class="card">
         <div class="card-header text-center">
-          <h2 class="card-title">Edição de Pessoa</h2>
+          <h2 class="card-title">Edição de Pessoa #<?= $pessoa->getId()?></h2>
         </div>
         <div class="card-body text-end">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="nome" id="nome" value="<?= $pessoa->getNome()?>" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" name="nome" id="nome" value="<?= $pessoa->getNome()?>" placeholder="Nome" aria-label="Nome">
           </div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="cpf" id="cpf" value="<?= $pessoa->getCpf()?>" placeholder="CPF" aria-label="CPF" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" name="cpf" id="cpf" value="<?= $pessoa->getCpf()?>" placeholder="CPF" aria-label="CPF">
           </div>
           <div class="input-group mb-3">
             <button type="button" class="btn btn-success" onclick="Gravar()">Gravar</button>
@@ -48,7 +48,7 @@
     async function Gravar() {
 
       let object = {};
-      const formData = new FormData(document.getElementById("cadastroPessoa"));
+      const formData = new FormData(document.getElementById("edicao-pessoa"));
 
       formData.forEach((element, key) => {
         object[key] = element;

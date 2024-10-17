@@ -1,10 +1,10 @@
 <?php
 
-use Src\Controller\PessoaController;
+use Src\Controller\ContatoController;
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-$action = str_replace('/api/pessoas', "", $url);
+$action = str_replace('/api/contatos', "", $url);
 
 if (preg_match('/^\/(\d+)$/', $action, $matches)) {
   $action = '/:id';
@@ -15,16 +15,16 @@ if (preg_match('/^\/(\d+)$/', $action, $matches)) {
 
 $actions = [
   'POST' => [
-        '' => [PessoaController::class, 'inserePessoa', $data],
+        '' => [ContatoController::class, 'insereContato', $data],
     ],
   'PUT' => [
-        '/:id' => [PessoaController::class, 'alteraPessoa', [...$data, 'id' => $id]]
+        '/:id' => [ContatoController::class, 'alteraContato', [...$data, 'id' => $id]]
     ],
   'DELETE' => [
-        '/:id' => [PessoaController::class, 'removePessoa', [...$data, 'id' => $id]]
+        '/:id' => [ContatoController::class, 'removeContato', [...$data, 'id' => $id]]
     ],
   'GET' => [
-        '' => [PessoaController::class, 'listAll', $_GET]
+        '' => [ContatoController::class, 'listAll', $_GET]
     ],
 ];
 

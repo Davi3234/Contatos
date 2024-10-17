@@ -3,6 +3,7 @@ namespace Src\Service;
 
 use Exception;
 use Src\Model\Pessoa;
+use Src\Repository\ContatoRepository;
 use Src\Repository\PessoaRepository;
 
 class PessoaService{
@@ -67,6 +68,17 @@ class PessoaService{
         try {
             $pessoa = $this->pessoaRepository->searchById($args['id']);
 
+            $contatoRepository = new ContatoRepository();
+
+            $contatoRepository->buildQuery(['pessoa' => $pessoa]);
+            $contatos = $contatoRepository->searchAllByCondicao();
+
+            if(is_array($contatos) && count($contatos) > 0){
+                foreach($contatos as $contato){
+                    $contatoRepository->delete($contato);
+                }
+            }
+
             $this->pessoaRepository->delete($pessoa);
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
@@ -81,7 +93,8 @@ class PessoaService{
      */
     public function listAll(array $args){
         try {
-            return $this->modelToArray($this->pessoaRepository->searchAll());
+            $this->pessoaRepository->buildQuery($args);
+            return $this->modelToArray($this->pessoaRepository->searchAllByCondicao());
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
@@ -155,4 +168,5 @@ class PessoaService{
 
         return true;
     }
+
 }

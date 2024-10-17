@@ -18,7 +18,7 @@
 
 <body>
   <?php require_once VIEW_PATH . 'Components/menu.php' ?>
-  <form id="cadastroPessoa" style="margin-top: 20px">
+  <form id="cadastro-pessoa" class="mt-4">
     <div class="container">
       <?php require_once VIEW_PATH . 'Components/breadcrumb.php' ?>
       <div class="card">
@@ -27,10 +27,10 @@
         </div>
         <div class="card-body text-end">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" aria-label="Nome">
           </div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="cpf" id="cpf" placeholder="CPF" aria-label="CPF" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" name="cpf" id="cpf" placeholder="CPF" aria-label="CPF">
           </div>
           <div class="input-group mb-3">
             <button type="button" class="btn btn-success" onclick="Gravar()">Gravar</button>
@@ -48,7 +48,7 @@
     async function Gravar() {
 
       let object = {};
-      const formData = new FormData(document.getElementById("cadastroPessoa"));
+      const formData = new FormData(document.getElementById("cadastro-pessoa"));
 
       formData.forEach((element, key) => {
         object[key] = element;
@@ -59,7 +59,8 @@
         body: JSON.stringify(object),
       }).then(async function (response){
         return await response.json();
-      })
+      });
+      
       if(response){
         appendAlert(response.message, response.status, ".alerta");
       }
