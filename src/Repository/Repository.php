@@ -36,6 +36,7 @@ abstract class Repository
     /**
      * Atualizando dado
      * @param T $entity
+     * @param int $id
      * @return void
      * @throws Exception
      */

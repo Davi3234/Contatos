@@ -31,7 +31,13 @@ class PessoaController{
         }
     }
     public function alteraPessoa(array $args){
-
+        try {
+            $this->pessoaService->updatePessoa($args);
+            echo (new Response("Inserido com sucesso",200))->outputMessage();
+        } catch (Exception $e) {
+            
+            echo (new Response($e->getMessage(),500))->outputMessage();
+        }
     }
     public function removePessoa(array $id){
 
@@ -72,7 +78,7 @@ class PessoaController{
     public function viewEdicao($args){
         $breadCrumbs = [ALL_PATHS['home'], ALL_PATHS['consultaPessoa'], ALL_PATHS['edicaoPessoa']];
 
-        $id = $args['id'];
+        $pessoa = $this->pessoaService->listOne($args);
 
         require_once 'src/View/Pessoa/edicao.php';
     }

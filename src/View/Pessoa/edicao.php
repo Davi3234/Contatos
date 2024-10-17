@@ -27,10 +27,10 @@
         </div>
         <div class="card-body text-end">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" name="nome" id="nome" value="<?= $pessoa->getNome()?>" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1">
           </div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="cpf" id="cpf" placeholder="CPF" aria-label="CPF" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" name="cpf" id="cpf" value="<?= $pessoa->getCpf()?>" placeholder="CPF" aria-label="CPF" aria-describedby="basic-addon1">
           </div>
           <div class="input-group mb-3">
             <button type="button" class="btn btn-success" onclick="Gravar()">Gravar</button>
@@ -46,9 +46,9 @@
     });
 
     async function Gravar() {
-      const response = await fetch('/api/pessoas', {
-        method: 'POST',
-        body: new FormData(document.getElementById("cadastroPessoa")),
+      const response = await fetch('/api/pessoas/<?= $pessoa->getId()?>', {
+        method: 'PUT',
+        body: $("#cadastroPessoa").serialize(),
       }).then(async function (response){
         return await response.json();
       })

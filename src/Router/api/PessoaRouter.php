@@ -11,17 +11,28 @@ $actions = [
         '' => [PessoaController::class, 'inserePessoa'],
     ],
   'PUT' => [
-        '' => [PessoaController::class, 'alteraPessoa']
+        '/:id' => [PessoaController::class, 'alteraPessoa']
     ],
   'DELETE' => [
-        '' => [PessoaController::class, 'removePessoa']
+        '/:id' => [PessoaController::class, 'removePessoa']
     ],
   'GET' => [
         '' => [PessoaController::class, 'listAll']
     ],
 ];
 
+if (preg_match('/^\/(\d+)$/', $action, $matches)) {
+  $action = '/:id';
+  $id = $matches[1];
+} else {
+  $id = null;
+}
+
 $controller = new $actions[$method][$action][0];
 $function = $actions[$method][$action][1];
 
-$controller->$function($_REQUEST);
+if ($id !== null) {
+  $controller->$function([...$data, 'id' => $id]);
+} else {
+  $controller->$function($data);
+}

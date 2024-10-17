@@ -42,10 +42,11 @@ class PessoaService{
      */
     public function updatePessoa(array $args): void{
         try {
-            $pessoa = new Pessoa(
-                $args['nome'],
-                $args['cpf']
-            );
+            $pessoa = $this->pessoaRepository->searchById($args['id']);
+
+            var_dump($args);
+            $pessoa->setNome($args['nome']);
+            $pessoa->setCpf($args['cpf']);
 
             $this->validaDados($pessoa);
 
@@ -69,6 +70,30 @@ class PessoaService{
         }
     }
 
+    /**
+     * Função responsável por editar a pessoa
+     * @param array $args
+     * @throws Exception
+     * @return Pessoa
+     */
+    public function listOne(array $args){
+        try {
+            return $this->pessoaRepository->searchById($args['id']);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    /**
+     * Converte uma lista de pessoas para um array indexado
+     * @param Pessoa[] $pessoas
+     * @return array
+     */
+    private function arrayModelToArray($pessoas){
+        return array_map(function($pessoa){
+            return $pessoa->toArray();
+        }, $pessoas);
+    }
     private function modelToArray($pessoas){
         return array_map(function($pessoa){
             return $pessoa->toArray();
