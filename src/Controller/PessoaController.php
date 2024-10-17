@@ -17,7 +17,7 @@ class PessoaController{
     }
 
     /**
-     * Summary of inserePessoa
+     * Insere um registro na tabela de pessoa
      * @param array $args
      * @return void
      */
@@ -30,17 +30,34 @@ class PessoaController{
             echo (new Response($e->getMessage(),500))->outputMessage();
         }
     }
+
+    /**
+     * Altera um registro da tabela de pessoas
+     * @param array $args
+     * @return void
+     */
     public function alteraPessoa(array $args){
         try {
             $this->pessoaService->updatePessoa($args);
-            echo (new Response("Inserido com sucesso",200))->outputMessage();
+            echo (new Response("Alterado com sucesso",200))->outputMessage();
         } catch (Exception $e) {
             
             echo (new Response($e->getMessage(),500))->outputMessage();
         }
     }
-    public function removePessoa(array $id){
 
+    /**
+     * Remove uma pessoa da tabela de pessoas
+     * @param array $args
+     * @return void
+     */
+    public function removePessoa(array $args){
+        try{
+            $this->pessoaService->removePessoa($args);
+            echo (new Response("Removido com sucesso",200))->outputMessage();
+        }catch (Exception $e){
+            echo (new Response($e->getMessage(), 500))->outputMessage();
+        }
     }
     public function listAll($args){
         try{

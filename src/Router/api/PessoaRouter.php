@@ -21,6 +21,7 @@ $actions = [
     ],
 ];
 
+
 if (preg_match('/^\/(\d+)$/', $action, $matches)) {
   $action = '/:id';
   $id = $matches[1];

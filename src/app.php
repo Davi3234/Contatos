@@ -18,7 +18,11 @@ $url = rtrim($url, '/');
 
 $input = file_get_contents("php://input");
 
-$data = json_decode($input, true);
+$data = json_decode($input, true) ?? [];
+
+if(str_contains($url, 'api')){
+	header('Content-Type: application/json');
+}
 
 foreach($rotas as $rota => $arquivo){
 	if (str_starts_with($url, $rota)) {

@@ -11,6 +11,11 @@
       background-color: rgba(241,241,241);
       border-radius: 4px;
     }
+    .alerta{
+      position:absolute;
+      top: 89%;
+      left: 81%;
+    }
   </style>
   <body>
       <?php require_once VIEW_PATH.'Components/menu.php'?>
@@ -22,9 +27,9 @@
               <h2 class="card-title">Consulta de Pessoa</h2>
           </div>
           <div class="card-body">
-            <button type="button" class="btn btn-primary" onclick="Incluir()">Incluir</button>
-            <button type="button" class="btn btn-primary" onclick="Editar()">Editar</button>
-            <button type="button" class="btn btn-danger" onclick="Excluir()">Excluir</button>
+            <button id="btn-incluir" type="button" class="btn btn-primary" onclick="Incluir()">Incluir</button>
+            <button id="btn-editar" type="button" class="btn btn-primary" onclick="Editar()" disabled>Editar</button>
+            <button id="btn-excluir" type="button" class="btn btn-danger" onclick="Excluir()" disabled>Excluir</button>
             <table id="table-pessoa" class="table table-hover">
               <thead>
                 <tr>
@@ -38,6 +43,7 @@
           </div>
         </div>
       </div>
+      <div class="alerta"></div>
 
       <script type="text/template" id="row-template">
         <tr idpessoa="{{id}}">
@@ -51,6 +57,9 @@
         let idSelected = 0;
 
         async function loadPessoas(){
+
+          $("#body-pessoas").html("");
+
           const response = await fetch('/api/pessoas')
           .then(async function (response){
             return await response.json();
@@ -62,6 +71,8 @@
             content = content.replaceAll('{{cpf}}', element.cpf);
             document.getElementById('body-pessoas').innerHTML += content;
           });
+
+          $("#table-pessoa tbody tr").on("click", selectRow);
         }
 
         function Incluir(){
@@ -72,19 +83,34 @@
           window.location="/view/pessoas/edicao?id="+idSelected;
         }
 
-        function Excluir(){
+        async function Excluir(){
 
+          const response = await fetch('/api/pessoas/'+idSelected, {
+            method: 'DELETE',
+          }).then(async function (response){
+            return await response.json();
+          });
+
+          if(response){
+            appendAlert(response.message, response.status, ".alerta");
+          }
+
+          $("#btn-editar").attr('disabled', 'disabled');
+          $("#btn-excluir").attr('disabled', 'disabled');
+
+          await loadPessoas();
         } 
+
         function selectRow(){
           $("#table-pessoa tbody tr").removeClass('table-active');
           $(this).addClass('table-active');
           idSelected = $(this).attr("idpessoa");
+          $("#btn-editar").removeAttr('disabled', 'disabled');
+          $("#btn-excluir").removeAttr('disabled', 'disabled');
         }
         
         $(async function() {
           await loadPessoas();
-
-          $("#table-pessoa tbody tr").on("click", selectRow);
         });
       </script>
   </body>

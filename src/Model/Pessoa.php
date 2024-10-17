@@ -13,7 +13,7 @@ class Pessoa
     #[Id]
     #[GeneratedValue]
     #[Column]
-    public readonly int $id;
+    private int $id;
 
     public function __construct(
         #[Column]

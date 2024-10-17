@@ -1,4 +1,5 @@
 <?php
+
 if(in_array($_SERVER['HTTP_SEC_FETCH_DEST'], ['empty', 'document'])){
   require_once "vendor/autoload.php";
   

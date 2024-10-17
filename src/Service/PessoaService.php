@@ -14,6 +14,7 @@ class PessoaService{
         $this->pessoaRepository = $pessoaRepository;
         $this->erros = [];
     }
+
     /**
      * Função responsável por inserir a pessoa
      * @param array $args
@@ -34,6 +35,7 @@ class PessoaService{
             throw new Exception($e->getMessage());
         }
     }
+
     /**
      * Função responsável por editar a pessoa
      * @param array $args
@@ -43,14 +45,29 @@ class PessoaService{
     public function updatePessoa(array $args): void{
         try {
             $pessoa = $this->pessoaRepository->searchById($args['id']);
-
-            var_dump($args);
+            
             $pessoa->setNome($args['nome']);
             $pessoa->setCpf($args['cpf']);
 
             $this->validaDados($pessoa);
 
             $this->pessoaRepository->update($pessoa);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    /**
+     * Função responsável por remover uma pessoa
+     * @param array $args
+     * @throws Exception
+     * @return void
+     */
+    public function removePessoa(array $args): void{
+        try {
+            $pessoa = $this->pessoaRepository->searchById($args['id']);
+
+            $this->pessoaRepository->delete($pessoa);
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
@@ -116,6 +133,7 @@ class PessoaService{
     }
 
     public function validaCpf(string $cpf): bool{
+        $cpf = preg_replace('/[\.\-]/i','', $cpf);
         if(strlen($cpf) != 11){
             return false;
         }

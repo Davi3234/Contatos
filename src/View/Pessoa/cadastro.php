@@ -46,9 +46,17 @@
     });
 
     async function Gravar() {
+
+      let object = {};
+      const formData = new FormData(document.getElementById("cadastroPessoa"));
+
+      formData.forEach((element, key) => {
+        object[key] = element;
+      });
+
       const response = await fetch('/api/pessoas', {
         method: 'POST',
-        body: new FormData(document.getElementById("cadastroPessoa")),
+        body: JSON.stringify(object),
       }).then(async function (response){
         return await response.json();
       })
